@@ -24,7 +24,7 @@ export default function PartnerCompanies() {
   const row = [...partners, ...partners];
 
   return (
-    <section id="partners" className="py-24 md:py-32 bg-[var(--ivory-dark)]/40 overflow-hidden">
+    <section id="partners" className="py-14 md:py-16 bg-[var(--ivory-dark)]/40 overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-14 mb-12">
         <div className="grid grid-cols-12 gap-6 md:gap-10">
           <div className="col-span-12 md:col-span-4 animate-on-scroll">

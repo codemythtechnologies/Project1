@@ -26,7 +26,7 @@ const values = [
 
 export default function About() {
   return (
-    <section id="about" className="py-24 md:py-36 relative">
+    <section id="about" className="py-14 md:py-20 relative">
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-14">
         {/* Section header */}
         <div className="grid grid-cols-12 gap-6 md:gap-10 mb-16 md:mb-24">

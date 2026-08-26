@@ -29,10 +29,10 @@ export default function Navbar() {
 
   return (
     <>
-      {/* Always-on backdrop keeps the bar legible over every section (light or dark
-          content behind it) instead of only gaining a background after scrolling. */}
+      {/* Fully opaque backdrop keeps the bar (and the logo/company name) legible over
+          every section, including images, regardless of scroll position. */}
       <header
-        className={`fixed top-0 inset-x-0 z-50 bg-[var(--ivory)]/90 backdrop-blur-md border-b border-[var(--line)] transition-all duration-300 ${
+        className={`fixed top-0 inset-x-0 z-50 bg-[var(--ivory)] border-b border-[var(--line)] transition-all duration-300 ${
           scrolled ? 'py-2.5 shadow-sm shadow-black/5' : 'py-4'
         }`}
       >

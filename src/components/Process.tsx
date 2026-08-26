@@ -30,7 +30,7 @@ const process = [
 
 export default function Process() {
   return (
-    <section id="process" className="py-24 md:py-36 bg-[var(--ivory-dark)]/40 relative overflow-hidden">
+    <section id="process" className="py-14 md:py-20 bg-[var(--ivory-dark)]/40 relative overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-14 relative z-10">
         <div className="grid grid-cols-12 gap-6 md:gap-10 mb-16 md:mb-20">
           <div className="col-span-12 md:col-span-4 animate-on-scroll">

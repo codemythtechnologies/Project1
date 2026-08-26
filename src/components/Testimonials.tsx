@@ -34,7 +34,7 @@ export default function Testimonials() {
   const [featured, ...rest] = filtered;
 
   return (
-    <section id="testimonials" className="py-24 md:py-36">
+    <section id="testimonials" className="py-14 md:py-20">
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-14">
         <div className="grid grid-cols-12 gap-6 md:gap-10 mb-12 md:mb-16">
           <div className="col-span-12 md:col-span-4 animate-on-scroll">
