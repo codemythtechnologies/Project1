@@ -1,68 +1,102 @@
-import { FileSearch, ClipboardList, UsersRound, CheckCircle2 } from 'lucide-react';
+const processImage =
+  'https://images.unsplash.com/photo-1714974528737-3e6c7e4d11af?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NTY2ODh8MHwxfHNlYXJjaHwzfHxjb3Jwb3JhdGUlMjBwcm9mZXNzaW9uYWxzfGVufDB8fHx8MTc4NzY2MDcyNHww&ixlib=rb-4.1.0&q=85';
 
-const steps = [
+const process = [
   {
-    icon: FileSearch,
+    step: '01',
     title: 'Understanding Your Needs',
-    desc: 'You provide a detailed job description and candidate profile. We analyze your requirements to understand the exact skills and traits needed.',
-    num: '01',
+    description:
+      'You provide a detailed job description and candidate profile. We analyze your requirements to understand the exact skills and traits needed.',
   },
   {
-    icon: ClipboardList,
+    step: '02',
     title: 'Sourcing & Screening',
-    desc: 'We leverage our database of millions of resumes, advertise across channels, and conduct in-depth preliminary assessments of shortlisted candidates.',
-    num: '02',
+    description:
+      'We leverage our database of millions of resumes, advertise across channels, and conduct in-depth preliminary assessments of shortlisted candidates.',
   },
   {
-    icon: UsersRound,
+    step: '03',
     title: 'Candidate Presentation',
-    desc: 'Qualitative candidate vitae with our assessment notes are sent to you for review. You select the candidates you want to interview.',
-    num: '03',
+    description:
+      'Qualitative candidate vitae with our assessment notes are sent to you for review. You select the candidates you want to interview.',
   },
   {
-    icon: CheckCircle2,
+    step: '04',
     title: 'Placement & Support',
-    desc: 'Upon selection, we facilitate the offer process. Free replacement is provided if the candidate leaves within 3 months of joining.',
-    num: '04',
+    description:
+      'Upon selection, we facilitate the offer process. Free replacement is provided if the candidate leaves within 3 months of joining.',
   },
 ];
 
 export default function Process() {
   return (
-    <section className="relative bg-white py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <div className="animate-on-scroll inline-flex items-center gap-2 rounded-full bg-brand-50 px-4 py-1.5 text-sm font-semibold text-brand-700">
-            How We Work
+    <section
+      id="process"
+      className="py-24 md:py-36 bg-[var(--ink)] text-[var(--ivory)] relative overflow-hidden"
+    >
+      <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-14 relative z-10">
+        <div className="grid grid-cols-12 gap-6 md:gap-10 mb-16 md:mb-20">
+          <div className="col-span-12 md:col-span-4 animate-on-scroll">
+            <span className="eyebrow" style={{ color: 'var(--emerald-accent)' }}>
+              How We Work
+            </span>
+            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--ivory)]/50 mt-6">
+              — Chapter 04
+            </div>
           </div>
-          <h2 className="animate-on-scroll mt-5 text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl lg:text-[2.75rem]">
-            Our Proven Recruitment Process
-          </h2>
-          <p className="animate-on-scroll mx-auto mt-4 max-w-2xl text-lg text-ink-600">
-            A structured, transparent approach refined over 24 years — designed to
-            deliver the right candidate efficiently and reliably.
-          </p>
+          <div className="col-span-12 md:col-span-8 animate-on-scroll">
+            <h2 className="font-serif display-lg text-[var(--ivory)]">
+              Our Proven{' '}
+              <em className="italic" style={{ color: 'var(--emerald-accent)' }}>
+                Recruitment
+              </em>{' '}
+              Process.
+            </h2>
+            <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-[var(--ivory)]/70">
+              A structured, transparent approach refined over 24 years — designed to deliver
+              the right candidate efficiently and reliably.
+            </p>
+          </div>
         </div>
 
-        <div className="mt-16 grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {steps.map((step, i) => (
-            <div key={step.title} className="animate-on-scroll relative" style={{ transitionDelay: `${i * 100}ms` }}>
-              {/* Connector line */}
-              {i < steps.length - 1 && (
-                <div className="absolute top-10 left-[60%] hidden h-0.5 w-[80%] bg-gradient-to-r from-brand-300 to-brand-100 lg:block" />
-              )}
-              <div className="relative group">
-                <div className="flex h-20 w-20 items-center justify-center rounded-2xl bg-gradient-to-br from-brand-50 to-brand-100 ring-2 ring-brand-200 transition-all duration-500 group-hover:from-brand-500 group-hover:to-brand-700 group-hover:ring-brand-300 group-hover:shadow-xl group-hover:shadow-brand-500/30">
-                  <step.icon className="h-9 w-9 text-brand-600 transition-colors duration-500 group-hover:text-white" />
-                </div>
-                <span className="absolute -top-2 -right-2 flex h-7 w-7 items-center justify-center rounded-full bg-accent-400 text-xs font-extrabold text-ink-900 shadow-md">
-                  {step.num}
-                </span>
-              </div>
-              <h3 className="mt-5 text-lg font-bold text-ink-900">{step.title}</h3>
-              <p className="mt-2 text-sm text-ink-600 leading-relaxed">{step.desc}</p>
+        <div className="grid grid-cols-12 gap-6 md:gap-10">
+          <div className="col-span-12 lg:col-span-5 animate-on-scroll">
+            <div className="aspect-[4/5] overflow-hidden">
+              <img
+                src={processImage}
+                alt="Team collaboration"
+                className="w-full h-full object-cover img-editorial"
+                loading="lazy"
+                style={{ filter: 'grayscale(0.25) contrast(1.05)' }}
+              />
             </div>
-          ))}
+          </div>
+
+          <div className="col-span-12 lg:col-span-7 animate-on-scroll">
+            <div className="border-t border-white/15">
+              {process.map((p) => (
+                <div
+                  key={p.step}
+                  className="grid grid-cols-12 gap-4 py-8 border-b border-white/15 group hover:pl-4 transition-all duration-500"
+                >
+                  <div className="col-span-3 md:col-span-2">
+                    <span
+                      className="font-serif text-4xl md:text-5xl tabular italic"
+                      style={{ color: 'var(--emerald-accent)' }}
+                    >
+                      {p.step}
+                    </span>
+                  </div>
+                  <div className="col-span-9 md:col-span-10">
+                    <h3 className="font-serif text-2xl md:text-[26px] leading-tight">{p.title}</h3>
+                    <p className="mt-3 text-[14px] leading-relaxed text-[var(--ivory)]/65 max-w-xl">
+                      {p.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </div>
     </section>

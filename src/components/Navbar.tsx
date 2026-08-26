@@ -1,15 +1,14 @@
 import { useEffect, useState } from 'react';
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Logo from './Logo';
 
-const navLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'About', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Industries', href: '#industries' },
-  { label: 'Jobs', href: '#jobs' },
-  { label: 'Testimonials', href: '#testimonials' },
-  { label: 'Contact', href: '#contact' },
+const links = [
+  { id: 'about', label: 'About' },
+  { id: 'services', label: 'Services' },
+  { id: 'industries', label: 'Industries' },
+  { id: 'jobs', label: 'Openings' },
+  { id: 'testimonials', label: 'Voices' },
+  { id: 'contact', label: 'Contact' },
 ];
 
 export default function Navbar() {
@@ -17,98 +16,70 @@ export default function Navbar() {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 40);
     window.addEventListener('scroll', onScroll, { passive: true });
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleNav = (href: string) => {
+  const handleNav = (id: string) => {
     setOpen(false);
-    const el = document.querySelector(href);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        scrolled
-          ? 'glass shadow-lg shadow-ink-900/5 py-2'
-          : 'bg-transparent py-4'
-      }`}
-    >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
-        <button onClick={() => handleNav('#home')} className="transition-transform hover:scale-105">
-          <Logo variant={scrolled ? 'dark' : 'dark'} />
-        </button>
-
-        {/* Desktop links */}
-        <ul className="hidden items-center gap-1 lg:flex">
-          {navLinks.map((link) => (
-            <li key={link.href}>
-              <button
-                onClick={() => handleNav(link.href)}
-                className="group relative px-3.5 py-2 text-sm font-semibold text-ink-700 transition-colors hover:text-brand-600"
-              >
-                {link.label}
-                <span className="absolute bottom-0 left-1/2 h-0.5 w-0 -translate-x-1/2 bg-brand-500 transition-all duration-300 group-hover:w-full" />
-              </button>
-            </li>
-          ))}
-        </ul>
-
-        <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href="tel:+919944909999"
-            className="flex items-center gap-2 text-sm font-semibold text-ink-600 transition-colors hover:text-brand-600"
-          >
-            <Phone className="h-4 w-4" />
-            +91 99449 09999
-          </a>
-          <button
-            onClick={() => handleNav('#contact')}
-            className="rounded-full bg-gradient-to-r from-brand-500 to-brand-700 px-5 py-2.5 text-sm font-bold text-white shadow-lg shadow-brand-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-brand-500/40 hover:-translate-y-0.5"
-          >
-            Get Started
-          </button>
-        </div>
-
-        {/* Mobile toggle */}
-        <button
-          onClick={() => setOpen(!open)}
-          className="rounded-lg p-2 text-ink-700 transition-colors hover:bg-ink-100 lg:hidden"
-          aria-label="Toggle menu"
-        >
-          {open ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-        </button>
-      </nav>
-
-      {/* Mobile menu */}
-      <div
-        className={`overflow-hidden transition-all duration-400 lg:hidden ${
-          open ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+    <>
+      <header
+        className={`fixed top-0 inset-x-0 z-50 transition-all duration-500 ${
+          scrolled ? 'bg-[var(--ivory)]/85 backdrop-blur-md border-b border-[var(--line)]' : 'bg-transparent'
         }`}
       >
-        <div className="glass mx-4 mt-2 rounded-2xl border border-ink-200/50 p-4 shadow-xl">
-          <ul className="flex flex-col gap-1">
-            {navLinks.map((link) => (
-              <li key={link.href}>
-                <button
-                  onClick={() => handleNav(link.href)}
-                  className="w-full rounded-lg px-4 py-3 text-left text-sm font-semibold text-ink-700 transition-colors hover:bg-brand-50 hover:text-brand-600"
-                >
-                  {link.label}
-                </button>
-              </li>
+        <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-14 py-5 flex items-center justify-between">
+          <button onClick={() => handleNav('home')} className="flex items-center gap-3 group">
+            <Logo />
+          </button>
+
+          <nav className="hidden md:flex items-center gap-8">
+            {links.map((l) => (
+              <button
+                key={l.id}
+                onClick={() => handleNav(l.id)}
+                className="text-[13px] tracking-wide link-underline text-[var(--ink)]"
+              >
+                {l.label}
+              </button>
             ))}
-          </ul>
-          <button
-            onClick={() => handleNav('#contact')}
-            className="mt-3 w-full rounded-full bg-gradient-to-r from-brand-500 to-brand-700 px-5 py-3 text-sm font-bold text-white shadow-lg shadow-brand-500/30"
-          >
-            Get Started
+          </nav>
+
+          <button onClick={() => handleNav('jobs')} className="hidden md:inline-flex btn-emerald text-[11px] py-3 px-5">
+            Explore Openings
+          </button>
+
+          <button className="md:hidden text-[var(--ink)]" onClick={() => setOpen(true)} aria-label="Open menu">
+            <Menu size={22} />
           </button>
         </div>
-      </div>
-    </header>
+      </header>
+
+      {open && (
+        <div className="fixed inset-0 z-[60] bg-[var(--ivory)] md:hidden flex flex-col">
+          <div className="flex items-center justify-between px-6 py-5 border-b border-[var(--line)]">
+            <span className="font-serif text-lg">Renaissance</span>
+            <button onClick={() => setOpen(false)} aria-label="Close menu">
+              <X size={22} />
+            </button>
+          </div>
+          <div className="flex flex-col p-8 gap-6">
+            {links.map((l) => (
+              <button key={l.id} onClick={() => handleNav(l.id)} className="font-serif text-3xl text-left">
+                {l.label}
+              </button>
+            ))}
+            <button onClick={() => handleNav('jobs')} className="btn-emerald mt-6 self-start">
+              Explore Openings
+            </button>
+          </div>
+        </div>
+      )}
+    </>
   );
 }

@@ -1,12 +1,11 @@
 import { useEffect, useState } from 'react';
-import { MapPin, Briefcase, Clock, ArrowRight, Search, X } from 'lucide-react';
+import { ArrowUpRight, MapPin, Clock, Briefcase } from 'lucide-react';
 import { supabase, type JobOpening } from '@/lib/supabase';
 
 export default function Jobs() {
   const [jobs, setJobs] = useState<JobOpening[]>([]);
   const [loading, setLoading] = useState(true);
-  const [filter, setFilter] = useState<string>('All');
-  const [selectedJob, setSelectedJob] = useState<JobOpening | null>(null);
+  const [active, setActive] = useState('All');
 
   useEffect(() => {
     const fetchJobs = async () => {
@@ -22,12 +21,7 @@ export default function Jobs() {
   }, []);
 
   const departments = ['All', ...Array.from(new Set(jobs.map((j) => j.department)))];
-  const filtered = filter === 'All' ? jobs : jobs.filter((j) => j.department === filter);
-
-  const scrollToContact = () => {
-    setSelectedJob(null);
-    document.querySelector('#contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
+  const filtered = active === 'All' ? jobs : jobs.filter((j) => j.department === active);
 
   const timeAgo = (dateStr: string) => {
     const diff = Date.now() - new Date(dateStr).getTime();
@@ -40,32 +34,37 @@ export default function Jobs() {
   };
 
   return (
-    <section id="jobs" className="relative bg-ink-50 py-24">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <div className="animate-on-scroll inline-flex items-center gap-2 rounded-full bg-brand-100 px-4 py-1.5 text-sm font-semibold text-brand-700">
-            Current Openings
+    <section id="jobs" className="py-24 md:py-36">
+      <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-14">
+        <div className="grid grid-cols-12 gap-6 md:gap-10 mb-12 md:mb-16">
+          <div className="col-span-12 md:col-span-4 animate-on-scroll">
+            <span className="eyebrow">Current Openings</span>
+            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--muted)] mt-6">
+              — Chapter 05
+            </div>
           </div>
-          <h2 className="animate-on-scroll mt-5 text-3xl font-extrabold tracking-tight text-ink-900 sm:text-4xl lg:text-[2.75rem]">
-            Find Your Next Opportunity
-          </h2>
-          <p className="animate-on-scroll mx-auto mt-4 max-w-2xl text-lg text-ink-600">
-            Browse active positions across industries. Can't find the right fit?
-            Send us your CV and we'll match you with the perfect role.
-          </p>
+          <div className="col-span-12 md:col-span-8 animate-on-scroll">
+            <h2 className="font-serif display-lg">
+              Find Your Next <em className="italic text-[var(--emerald)]">Opportunity</em>.
+            </h2>
+            <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-[var(--ink-soft)]">
+              Browse active positions across industries. Can't find the right fit? Reach out
+              and we'll match you with the perfect role.
+            </p>
+          </div>
         </div>
 
-        {/* Filter tabs */}
+        {/* Filters */}
         {!loading && jobs.length > 0 && (
-          <div className="animate-on-scroll mt-12 flex flex-wrap justify-center gap-2">
+          <div className="flex flex-wrap gap-2 mb-12 border-t border-b border-[var(--line)] py-4 animate-on-scroll">
             {departments.map((dept) => (
               <button
                 key={dept}
-                onClick={() => setFilter(dept)}
-                className={`rounded-full px-5 py-2 text-sm font-semibold transition-all duration-300 ${
-                  filter === dept
-                    ? 'bg-gradient-to-r from-brand-500 to-brand-700 text-white shadow-lg shadow-brand-500/30'
-                    : 'bg-white text-ink-600 ring-1 ring-ink-200 hover:ring-brand-300 hover:text-brand-600'
+                onClick={() => setActive(dept)}
+                className={`text-[12px] uppercase tracking-[0.18em] py-2 px-4 border transition-all duration-300 ${
+                  active === dept
+                    ? 'bg-[var(--ink)] text-[var(--ivory)] border-[var(--ink)]'
+                    : 'bg-transparent text-[var(--ink)] border-[var(--line)] hover:border-[var(--ink)]'
                 }`}
               >
                 {dept}
@@ -74,124 +73,86 @@ export default function Jobs() {
           </div>
         )}
 
-        {/* Jobs grid */}
-        <div className="mt-12 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
-          {loading
-            ? Array.from({ length: 6 }).map((_, i) => (
-                <div key={i} className="rounded-2xl bg-white p-6 shadow-sm ring-1 ring-ink-100">
-                  <div className="h-6 w-24 rounded-full shimmer-bg" />
-                  <div className="mt-4 h-6 w-3/4 rounded shimmer-bg" />
-                  <div className="mt-3 h-4 w-full rounded shimmer-bg" />
-                  <div className="mt-2 h-4 w-2/3 rounded shimmer-bg" />
-                  <div className="mt-5 flex gap-3">
-                    <div className="h-8 w-20 rounded-lg shimmer-bg" />
-                    <div className="h-8 w-20 rounded-lg shimmer-bg" />
+        {/* Loading skeleton */}
+        {loading && (
+          <div className="border-t border-[var(--line)]">
+            {Array.from({ length: 4 }).map((_, i) => (
+              <div key={i} className="border-b border-[var(--line)] py-8 md:py-10 px-2 md:px-4">
+                <div className="h-4 w-24 rounded bg-[var(--ivory-dark)]" />
+                <div className="mt-4 h-7 w-2/3 rounded bg-[var(--ivory-dark)]" />
+                <div className="mt-3 h-4 w-full max-w-md rounded bg-[var(--ivory-dark)]" />
+              </div>
+            ))}
+          </div>
+        )}
+
+        {/* Magazine-style listings */}
+        {!loading && filtered.length > 0 && (
+          <div className="border-t border-[var(--line)] animate-on-scroll">
+            {filtered.map((job, i) => (
+              <a
+                key={job.id}
+                href="#contact"
+                className="group block border-b border-[var(--line)] py-8 md:py-10 hover:bg-[var(--ivory-dark)]/40 transition-colors duration-500 px-2 md:px-4"
+              >
+                <div className="grid grid-cols-12 gap-4 items-start">
+                  <div className="col-span-2 md:col-span-1">
+                    <span className="font-mono text-[10px] tabular text-[var(--emerald)]">
+                      {String(i + 1).padStart(2, '0')}
+                    </span>
+                  </div>
+                  <div className="col-span-10 md:col-span-6">
+                    <div className="flex items-center gap-3 mb-3">
+                      <span className="text-[10px] uppercase tracking-[0.22em] py-1 px-2.5 bg-[var(--emerald)]/10 text-[var(--emerald)] border border-[var(--emerald)]/20">
+                        {job.department}
+                      </span>
+                      <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">
+                        {timeAgo(job.posted_date)}
+                      </span>
+                    </div>
+                    <h3 className="font-serif text-2xl md:text-3xl leading-tight group-hover:text-[var(--emerald)] transition-colors">
+                      {job.title}
+                    </h3>
+                    <p className="mt-3 text-[13.5px] leading-relaxed text-[var(--muted)] max-w-lg">
+                      {job.description}
+                    </p>
+                  </div>
+                  <div className="col-span-12 md:col-span-4">
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center gap-2 text-[12.5px] text-[var(--ink-soft)]">
+                        <MapPin size={13} className="text-[var(--emerald)]" strokeWidth={1.5} />
+                        {job.location}
+                      </div>
+                      <div className="flex items-center gap-2 text-[12.5px] text-[var(--ink-soft)]">
+                        <Briefcase size={13} className="text-[var(--emerald)]" strokeWidth={1.5} />
+                        {job.type}
+                      </div>
+                      <div className="flex items-center gap-2 text-[12.5px] text-[var(--ink-soft)]">
+                        <Clock size={13} className="text-[var(--emerald)]" strokeWidth={1.5} />
+                        {job.experience}
+                      </div>
+                    </div>
+                  </div>
+                  <div className="col-span-12 md:col-span-1 flex md:justify-end">
+                    <ArrowUpRight
+                      size={24}
+                      className="text-[var(--ink)] opacity-40 group-hover:opacity-100 group-hover:text-[var(--emerald)] transition-all duration-500 group-hover:translate-x-1 group-hover:-translate-y-1"
+                    />
                   </div>
                 </div>
-              ))
-            : filtered.map((job, i) => (
-                <div
-                  key={job.id}
-                  className="animate-on-scroll group flex flex-col rounded-2xl bg-white p-6 shadow-sm ring-1 ring-ink-100 transition-all duration-500 hover:shadow-2xl hover:shadow-brand-500/10 hover:-translate-y-1.5 hover:ring-brand-200"
-                  style={{ transitionDelay: `${i * 60}ms` }}
-                >
-                  <div className="flex items-start justify-between">
-                    <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-700">
-                      {job.department}
-                    </span>
-                    <span className="text-xs font-medium text-ink-400">{timeAgo(job.posted_date)}</span>
-                  </div>
-                  <h3 className="mt-4 text-lg font-bold text-ink-900 transition-colors group-hover:text-brand-600">
-                    {job.title}
-                  </h3>
-                  <div className="mt-3 flex flex-wrap gap-3 text-sm text-ink-600">
-                    <span className="flex items-center gap-1.5">
-                      <MapPin className="h-4 w-4 text-brand-500" />
-                      {job.location}
-                    </span>
-                    <span className="flex items-center gap-1.5">
-                      <Briefcase className="h-4 w-4 text-brand-500" />
-                      {job.type}
-                    </span>
-                  </div>
-                  <div className="mt-2 flex items-center gap-1.5 text-sm text-ink-600">
-                    <Clock className="h-4 w-4 text-brand-500" />
-                    {job.experience}
-                  </div>
-                  <p className="mt-3 line-clamp-2 text-sm text-ink-500 leading-relaxed">
-                    {job.description}
-                  </p>
-                  <button
-                    onClick={() => setSelectedJob(job)}
-                    className="mt-auto flex items-center gap-1.5 pt-5 text-sm font-bold text-brand-600 transition-colors hover:text-brand-700"
-                  >
-                    View Details
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
-                  </button>
-                </div>
-              ))}
-        </div>
+              </a>
+            ))}
+          </div>
+        )}
 
         {!loading && jobs.length === 0 && (
-          <div className="mt-12 text-center">
-            <p className="text-ink-500">No active job openings at the moment. Please check back soon or send us your CV.</p>
+          <div className="border-t border-[var(--line)] py-16 text-center">
+            <p className="text-[var(--muted)]">
+              No active job openings at the moment. Please check back soon or send us your CV.
+            </p>
           </div>
         )}
       </div>
-
-      {/* Job detail modal */}
-      {selectedJob && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4"
-          onClick={() => setSelectedJob(null)}
-        >
-          <div className="absolute inset-0 bg-ink-900/60 backdrop-blur-sm animate-fade-in" />
-          <div
-            className="relative w-full max-w-lg rounded-3xl bg-white p-8 shadow-2xl animate-scale-in"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              onClick={() => setSelectedJob(null)}
-              className="absolute right-4 top-4 rounded-full p-2 text-ink-400 transition-colors hover:bg-ink-100 hover:text-ink-700"
-            >
-              <X className="h-5 w-5" />
-            </button>
-            <span className="rounded-full bg-brand-50 px-3 py-1 text-xs font-bold text-brand-700">
-              {selectedJob.department}
-            </span>
-            <h3 className="mt-4 text-2xl font-extrabold text-ink-900">{selectedJob.title}</h3>
-            <div className="mt-3 flex flex-wrap gap-4 text-sm text-ink-600">
-              <span className="flex items-center gap-1.5">
-                <MapPin className="h-4 w-4 text-brand-500" /> {selectedJob.location}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Briefcase className="h-4 w-4 text-brand-500" /> {selectedJob.type}
-              </span>
-              <span className="flex items-center gap-1.5">
-                <Clock className="h-4 w-4 text-brand-500" /> {selectedJob.experience}
-              </span>
-            </div>
-            <div className="mt-5 border-t border-ink-100 pt-5">
-              <h4 className="text-sm font-bold text-ink-900">Job Description</h4>
-              <p className="mt-2 text-sm text-ink-600 leading-relaxed">{selectedJob.description}</p>
-            </div>
-            <div className="mt-6 flex gap-3">
-              <button
-                onClick={scrollToContact}
-                className="flex-1 rounded-full bg-gradient-to-r from-brand-500 to-brand-700 px-6 py-3 text-sm font-bold text-white shadow-lg shadow-brand-500/30 transition-all hover:shadow-xl hover:-translate-y-0.5"
-              >
-                Apply Now
-              </button>
-              <button
-                onClick={() => setSelectedJob(null)}
-                className="rounded-full border-2 border-ink-200 px-6 py-3 text-sm font-bold text-ink-700 transition-colors hover:bg-ink-50"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </section>
   );
 }

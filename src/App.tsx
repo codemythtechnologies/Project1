@@ -1,10 +1,10 @@
 import { useScrollReveal } from '@/hooks/useScrollAnimation';
 import Navbar from '@/components/Navbar';
+import SideNav from '@/components/SideNav';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
 import Services from '@/components/Services';
 import Industries from '@/components/Industries';
-import Stats from '@/components/Stats';
 import Process from '@/components/Process';
 import Jobs from '@/components/Jobs';
 import PartnerCompanies from '@/components/PartnerCompanies';
@@ -16,14 +16,14 @@ function App() {
   useScrollReveal();
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="grain">
       <Navbar />
+      <SideNav />
       <main>
         <Hero />
         <About />
         <Services />
         <Industries />
-        <Stats />
         <Process />
         <Jobs />
         <PartnerCompanies />
