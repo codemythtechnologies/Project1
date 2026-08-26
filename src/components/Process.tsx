@@ -30,29 +30,20 @@ const process = [
 
 export default function Process() {
   return (
-    <section
-      id="process"
-      className="py-24 md:py-36 bg-[var(--ink)] text-[var(--ivory)] relative overflow-hidden"
-    >
+    <section id="process" className="py-24 md:py-36 bg-[var(--ivory-dark)]/40 relative overflow-hidden">
       <div className="max-w-[1440px] mx-auto px-6 md:px-10 lg:px-14 relative z-10">
         <div className="grid grid-cols-12 gap-6 md:gap-10 mb-16 md:mb-20">
           <div className="col-span-12 md:col-span-4 animate-on-scroll">
-            <span className="eyebrow" style={{ color: 'var(--emerald-accent)' }}>
-              How We Work
-            </span>
-            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--ivory)]/50 mt-6">
+            <span className="eyebrow">How We Work</span>
+            <div className="font-mono text-[10px] uppercase tracking-[0.22em] text-[var(--muted)] mt-6">
               — Chapter 04
             </div>
           </div>
           <div className="col-span-12 md:col-span-8 animate-on-scroll">
-            <h2 className="font-serif display-lg text-[var(--ivory)]">
-              Our Proven{' '}
-              <em className="italic" style={{ color: 'var(--emerald-accent)' }}>
-                Recruitment
-              </em>{' '}
-              Process.
+            <h2 className="font-serif display-lg">
+              Our Proven <em className="italic text-[var(--emerald)]">Recruitment</em> Process.
             </h2>
-            <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-[var(--ivory)]/70">
+            <p className="mt-6 max-w-2xl text-[15px] leading-relaxed text-[var(--ink-soft)]">
               A structured, transparent approach refined over 24 years — designed to deliver
               the right candidate efficiently and reliably.
             </p>
@@ -61,7 +52,7 @@ export default function Process() {
 
         <div className="grid grid-cols-12 gap-6 md:gap-10">
           <div className="col-span-12 lg:col-span-5 animate-on-scroll">
-            <div className="aspect-[4/5] overflow-hidden">
+            <div className="aspect-[4/5] overflow-hidden rounded-2xl">
               <img
                 src={processImage}
                 alt="Team collaboration"
@@ -73,23 +64,22 @@ export default function Process() {
           </div>
 
           <div className="col-span-12 lg:col-span-7 animate-on-scroll">
-            <div className="border-t border-white/15">
+            <div className="border-t border-[var(--line)]">
               {process.map((p) => (
                 <div
                   key={p.step}
-                  className="grid grid-cols-12 gap-4 py-8 border-b border-white/15 group hover:pl-4 transition-all duration-500"
+                  className="grid grid-cols-12 gap-4 py-8 border-b border-[var(--line)] group hover:pl-4 transition-all duration-500"
                 >
                   <div className="col-span-3 md:col-span-2">
-                    <span
-                      className="font-serif text-4xl md:text-5xl tabular italic"
-                      style={{ color: 'var(--emerald-accent)' }}
-                    >
+                    <span className="font-serif text-4xl md:text-5xl tabular italic text-[var(--emerald)]">
                       {p.step}
                     </span>
                   </div>
                   <div className="col-span-9 md:col-span-10">
-                    <h3 className="font-serif text-2xl md:text-[26px] leading-tight">{p.title}</h3>
-                    <p className="mt-3 text-[14px] leading-relaxed text-[var(--ivory)]/65 max-w-xl">
+                    <h3 className="font-serif text-2xl md:text-[26px] leading-tight text-[var(--ink)]">
+                      {p.title}
+                    </h3>
+                    <p className="mt-3 text-[14px] leading-relaxed text-[var(--muted)] max-w-xl">
                       {p.description}
                     </p>
                   </div>

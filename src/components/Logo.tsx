@@ -8,7 +8,7 @@ export default function Logo({ className = '', variant = 'dark' }: LogoProps) {
   return (
     <div className={`flex items-center gap-3 ${className}`}>
       <span
-        className={`w-9 h-9 flex items-center justify-center border font-serif italic text-lg flex-shrink-0 ${
+        className={`w-9 h-9 flex items-center justify-center border rounded-md font-serif italic text-lg flex-shrink-0 ${
           isLight ? 'border-[var(--ivory)] text-[var(--ivory)]' : 'border-[var(--ink)] text-[var(--ink)]'
         }`}
       >

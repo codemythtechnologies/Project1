@@ -73,8 +73,8 @@ export default function Services() {
         {/* Editorial services list */}
         <div className="grid grid-cols-12 gap-6 md:gap-10">
           <div className="col-span-12 lg:col-span-4 order-2 lg:order-1 animate-on-scroll">
-            <div className="sticky top-32">
-              <div className="aspect-[3/4] overflow-hidden bg-[var(--ivory-dark)]">
+            <div className="lg:sticky lg:top-28">
+              <div className="aspect-[3/4] overflow-hidden rounded-2xl bg-[var(--ivory-dark)]">
                 <img
                   src={servicesImage}
                   alt="Corporate team"

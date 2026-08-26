@@ -57,7 +57,7 @@ export default function Testimonials() {
               <button
                 key={t}
                 onClick={() => setTab(t)}
-                className={`text-[12px] uppercase tracking-[0.18em] py-2 px-4 border transition-all duration-300 ${
+                className={`text-[12px] uppercase tracking-[0.18em] py-2 px-4 rounded-lg border transition-all duration-300 ${
                   tab === t
                     ? 'bg-[var(--ink)] text-[var(--ivory)] border-[var(--ink)]'
                     : 'bg-transparent text-[var(--ink)] border-[var(--line)] hover:border-[var(--ink)]'
@@ -74,8 +74,8 @@ export default function Testimonials() {
 
         {loading && (
           <div className="border-t border-[var(--line)] pt-16">
-            <div className="h-6 w-40 bg-[var(--ivory-dark)]" />
-            <div className="mt-6 h-10 w-full max-w-2xl bg-[var(--ivory-dark)]" />
+            <div className="h-6 w-40 rounded bg-[var(--ivory-dark)]" />
+            <div className="mt-6 h-10 w-full max-w-2xl rounded bg-[var(--ivory-dark)]" />
           </div>
         )}
 

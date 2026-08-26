@@ -47,14 +47,14 @@ export default function About() {
         {/* Alternating image + text */}
         <div className="grid grid-cols-12 gap-6 md:gap-10 items-start">
           <div className="col-span-12 lg:col-span-6 animate-on-scroll">
-            <div className="aspect-[4/5] overflow-hidden bg-[var(--ivory-dark)] relative">
+            <div className="aspect-[4/5] overflow-hidden rounded-2xl bg-[var(--ivory-dark)] relative">
               <img
                 src={aboutImage}
                 alt="Executive office"
                 className="w-full h-full object-cover img-editorial"
                 loading="lazy"
               />
-              <div className="absolute bottom-4 left-4 bg-[var(--ivory)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.22em]">
+              <div className="absolute bottom-4 left-4 bg-[var(--ivory)] rounded-md px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.22em]">
                 Est. 2001 — Pondicherry
               </div>
             </div>

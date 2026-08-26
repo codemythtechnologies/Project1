@@ -55,14 +55,14 @@ export default function Hero() {
 
           {/* Right column — image + caption */}
           <div className="col-span-12 lg:col-span-5 relative">
-            <div className="relative aspect-[4/5] overflow-hidden bg-[var(--ivory-dark)]">
+            <div className="relative aspect-[4/5] overflow-hidden rounded-2xl bg-[var(--ivory-dark)]">
               <img
                 src={heroImage}
                 alt="Business handshake"
                 className="w-full h-full object-cover img-editorial"
                 loading="eager"
               />
-              <div className="absolute top-4 left-4 bg-[var(--ivory)] px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.22em]">
+              <div className="absolute top-4 left-4 bg-[var(--ivory)] rounded-md px-3 py-1.5 font-mono text-[10px] uppercase tracking-[0.22em]">
                 No. 001
               </div>
             </div>

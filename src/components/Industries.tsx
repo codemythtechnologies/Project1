@@ -1,14 +1,46 @@
 import { Cpu, Briefcase, Factory, Pill, Landmark, Hotel, HardHat, Stethoscope } from 'lucide-react';
 
 const industries = [
-  { name: 'IT & Software', icon: Cpu },
-  { name: 'Non-IT / Tech', icon: Briefcase },
-  { name: 'Manufacturing', icon: Factory },
-  { name: 'Pharmaceutical', icon: Pill },
-  { name: 'Banking & Finance', icon: Landmark },
-  { name: 'Hospitality & Hotels', icon: Hotel },
-  { name: 'Construction', icon: HardHat },
-  { name: 'Medical & Healthcare', icon: Stethoscope },
+  {
+    name: 'IT & Software',
+    icon: Cpu,
+    description: 'Developers, QA, DevOps & product roles across product and services firms.',
+  },
+  {
+    name: 'Non-IT / Tech',
+    icon: Briefcase,
+    description: 'Operations, admin, sales and support talent for non-technical functions.',
+  },
+  {
+    name: 'Manufacturing',
+    icon: Factory,
+    description: 'Plant staff, supervisors and production engineers across shop floors.',
+  },
+  {
+    name: 'Pharmaceutical',
+    icon: Pill,
+    description: 'GMP-trained production, QA/QC and regulatory affairs professionals.',
+  },
+  {
+    name: 'Banking & Finance',
+    icon: Landmark,
+    description: 'Branch, credit, and back-office roles for banks and NBFCs.',
+  },
+  {
+    name: 'Hospitality & Hotels',
+    icon: Hotel,
+    description: 'Front office, F&B and hotel management talent for luxury properties.',
+  },
+  {
+    name: 'Construction',
+    icon: HardHat,
+    description: 'Site engineers, project managers and skilled labour for builds.',
+  },
+  {
+    name: 'Medical & Healthcare',
+    icon: Stethoscope,
+    description: 'Clinical, para-medical and hospital administration professionals.',
+  },
 ];
 
 const stats = [
@@ -40,26 +72,23 @@ export default function Industries() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 md:grid-cols-4 border-t border-l border-[var(--line)] animate-on-scroll">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 animate-on-scroll">
           {industries.map((ind, i) => {
             const Icon = ind.icon;
             return (
               <div
                 key={ind.name}
-                className="group relative border-r border-b border-[var(--line)] aspect-square flex flex-col justify-between p-6 md:p-8 transition-colors duration-500 hover:bg-[var(--ink)] hover:text-[var(--ivory)] cursor-pointer overflow-hidden"
+                className="group relative rounded-2xl border border-[var(--line)] bg-white flex flex-col justify-between p-6 md:p-7 min-h-[200px] transition-all duration-500 hover:-translate-y-1 hover:border-[var(--emerald)] hover:shadow-xl hover:shadow-[var(--emerald)]/10 cursor-pointer"
               >
                 <div className="flex items-start justify-between">
-                  <span className="font-mono text-[10px] tabular text-[var(--muted)] group-hover:text-[var(--ivory)]/50 transition-colors">
-                    0{i + 1}
-                  </span>
-                  <Icon
-                    size={22}
-                    className="text-[var(--emerald)] group-hover:text-[var(--emerald-accent)] transition-transform duration-500 group-hover:-translate-y-1"
-                    strokeWidth={1.5}
-                  />
+                  <span className="font-mono text-[10px] tabular text-[var(--muted)]">0{i + 1}</span>
+                  <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-[var(--emerald)]/8 transition-colors duration-500 group-hover:bg-[var(--emerald)]/15">
+                    <Icon size={19} className="text-[var(--emerald)]" strokeWidth={1.5} />
+                  </div>
                 </div>
                 <div>
-                  <h3 className="font-serif text-lg md:text-xl leading-tight">{ind.name}</h3>
+                  <h3 className="font-serif text-lg md:text-xl leading-tight text-[var(--ink)]">{ind.name}</h3>
+                  <p className="mt-2 text-[12.5px] leading-relaxed text-[var(--muted)]">{ind.description}</p>
                 </div>
               </div>
             );
@@ -67,9 +96,9 @@ export default function Industries() {
         </div>
 
         {/* Stat strip */}
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-px bg-[var(--line)] animate-on-scroll">
+        <div className="mt-16 grid grid-cols-2 md:grid-cols-4 gap-4 animate-on-scroll">
           {stats.map((s) => (
-            <div key={s.l} className="bg-[var(--ivory)] p-6 md:p-8">
+            <div key={s.l} className="rounded-2xl bg-[var(--ivory-dark)]/50 p-6 md:p-8">
               <div className="font-serif text-4xl md:text-5xl tabular text-[var(--emerald)]">{s.v}</div>
               <div className="mt-2 text-[11px] uppercase tracking-[0.22em] text-[var(--muted)]">{s.l}</div>
             </div>

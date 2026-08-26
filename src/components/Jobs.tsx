@@ -61,7 +61,7 @@ export default function Jobs() {
               <button
                 key={dept}
                 onClick={() => setActive(dept)}
-                className={`text-[12px] uppercase tracking-[0.18em] py-2 px-4 border transition-all duration-300 ${
+                className={`text-[12px] uppercase tracking-[0.18em] py-2 px-4 rounded-lg border transition-all duration-300 ${
                   active === dept
                     ? 'bg-[var(--ink)] text-[var(--ivory)] border-[var(--ink)]'
                     : 'bg-transparent text-[var(--ink)] border-[var(--line)] hover:border-[var(--ink)]'
@@ -103,7 +103,7 @@ export default function Jobs() {
                   </div>
                   <div className="col-span-10 md:col-span-6">
                     <div className="flex items-center gap-3 mb-3">
-                      <span className="text-[10px] uppercase tracking-[0.22em] py-1 px-2.5 bg-[var(--emerald)]/10 text-[var(--emerald)] border border-[var(--emerald)]/20">
+                      <span className="text-[10px] uppercase tracking-[0.22em] py-1 px-2.5 rounded-md bg-[var(--emerald)]/10 text-[var(--emerald)] border border-[var(--emerald)]/20">
                         {job.department}
                       </span>
                       <span className="font-mono text-[10px] uppercase tracking-[0.18em] text-[var(--muted)]">

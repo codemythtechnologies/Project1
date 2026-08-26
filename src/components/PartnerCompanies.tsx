@@ -47,7 +47,7 @@ export default function PartnerCompanies() {
       {loading ? (
         <div className="flex gap-14 px-6 md:px-10 lg:px-14">
           {Array.from({ length: 5 }).map((_, i) => (
-            <div key={i} className="h-8 w-40 flex-shrink-0 bg-[var(--line)]/50" />
+            <div key={i} className="h-8 w-40 flex-shrink-0 rounded-lg bg-[var(--line)]/50" />
           ))}
         </div>
       ) : (
