@@ -32,6 +32,12 @@ body {
   font-feature-settings: 'ss01', 'cv11';
 }
 
+/* Wrapped in @layer components so Tailwind places these BEFORE utilities in the
+   compiled CSS. Without this, plain classes here (e.g. .btn-emerald) sat after
+   @tailwind utilities in source order and could silently win cascade ties against
+   utilities like `hidden` / `lg:inline-flex` at the same specificity — which was
+   why the navbar's "Explore Openings" button stayed visible on mobile. */
+@layer components {
 .font-serif {
   font-family: 'Fraunces', 'Playfair Display', Georgia, serif;
   font-optical-sizing: auto;
@@ -307,6 +313,7 @@ body {
   line-height: 1.35;
   letter-spacing: -0.01em;
 }
+} /* end @layer components */
 
 @layer utilities {
   .hide-scrollbar::-webkit-scrollbar {
